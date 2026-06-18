@@ -1,1 +1,25 @@
+### Overview
+As a DFIR analyst, I quickly became aware of CVEs and the fact that they're a useful reference when writing root-cause analysis in post-incident reports. CVE records provide the identifier and baseline vulnerability details. Remediation and hardening guidance typically comes from vendor advisories, CISA KEV entries, or threat intelligence reporting. Below, I take a deeper look at CVEs and how threat intelligence enables organizations to become aware and respond to vulnerabilities affecting them in a timely manner. 
+#### What CVSS Measures
+The Common Vulnerability Scoring System is measures the *technical* severity of vulnerabilities based on their characteristics, such as vulnerability and impact.
+#### What it Misses
+CVSS allows for quick and easy yet generalized prioritization however it does not measure organizational risk itself. CVSS does not account for asset criticality, internet exposure, active exploitation, business impact, or whether the vulnerability is actively exploited or relevant to a specific organization.
+#### How Threat Intel Improves Prioritization
+Threat intelligence is meant to help enhance awareness of ongoing threats targeting an organization, it's partners, it's relevant infrastructure, or related organizations. This awareness helps the organizations security professionals prioritize vulnerability patches as they relate to the organization in conjunction with the CVSS. 
+Threat intelligence adds context around adversary activity, exploitation in the wild, affected sectors, available proof-of-concept code, targeting patterns, and likely business impact. 
+#### Recent CISA Known Exploited Vulnerabilities
 
+> [!Example]
+> [Shiny Hunters Targets Education Sector with Oracle PeopleSoft Exploit](https://cloud.google.com/blog/topics/threat-intelligence/shinyhunters-targets-education-sector-oracle-exploit)
+> 
+
+ The ShinyHunters threat group, also tracked as UNC6240, recently exploited vulnerability CVE-2026-35273 (CVSS 9.8) in a campaign that disproportionately affected education-sector organizations. This is an Oracle PeopleSoft PeopleTools vulnerability that is remotely exploitable without authentication and may result in remote code execution. NVD lists affected versions 8.61 and 8.62. 
+#### Defender Actions
+As a well-established security program, the organization will set out to answer the following: **Are we exposed, compromised, or at risk?** This requires the organization to validate exposure, patch/mitigate, hunt for compromise, tune detections, and monitor updates.
+- **Confirm Exposure:** Review the organizations asset inventory, software versions, internet-facing systems, and known application dependencies. If the vulnerability is not applicable, the priority may shift from emergency remediation to continued monitoring.  vulnerable product, version, component, or configuration pertain to your organization?
+- **Validate Vulnerability:** If exposure is possible, validate by running a vulnerability scan, version checks, and vendor-provided detection methods. Findings should be validated before remediation decisions are made, especially in high-impact production systems.
+- **Prioritize Patching or Mitigation:** After confirmation of exposure, remediation should be prioritized based on active exploitation, asset criticality, internet exposure, and vendor guidance. Teams should immediately apply the vendor patch or disable vulnerable components and increase monitoring if immediate patching is not possible.  
+- **Hunt for Signs of Compromise**: Hunt for potential evidence of compromise in addition to patching especially if the exploitation has been observed in the wild. Review relevant logs, authentication activity, web requests, process execution, suspicious file creation, suspicious network connections, and any indicators provided by trusted threat intelligence or vendor reporting.
+- **Tune Detections Around Behavior, not just IOCs**: Indicators of Compromise (IOCs) are fleeting. Detection should include known IOCs where available but defenders should also focus on behavioral indicators and tactics, techniques, and procedures (TTPs) associated with the exploitation. This includes tuning telemetry sources and security controls (SIEM, EDR, IPS/IDS, WAF, and firewall detections) to identify exploit attempts and post-exploitation activity (privilege escalation, persistence, exfiltration behavior).
+- **Communicate Risk to Stakeholders:** Security teams should conduct their checks in parallel with communicating their efforts and findings with organizational leadership. It's critical to translate the vulnerability from a technical issue to an operational risk decision.  This includes exposure status, affected assets, remediation plan, business risk, and any evidence of exploitation. 
+- **Continue Monitoring:** After initial remediation, security teams will continue monitoring vendor advisories, CISA KEV updates, threat intelligence reporting, and internal telemetry for new exploit details, updated IOCs, or changes in adversary targeting. 
